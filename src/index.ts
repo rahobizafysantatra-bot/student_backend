@@ -5,7 +5,7 @@ import studentRoutes from './routes/student.routes.js';
 dotenv.config();
 
 const app = express();
-app.use(express.json()); // pour parser le JSON dans req.body
+app.use(express.json());
 
 app.use('/api/students', studentRoutes);
 

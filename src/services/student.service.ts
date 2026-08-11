@@ -1,35 +1,22 @@
-import { pool } from '../config/db.js';
-import type { Student } from '../models/student.model.js';
+import * as studentRepository from '../repositories/student.repository';
+import { Student } from '../models/student.model';
 
 export const getAllStudents = async (): Promise<Student[]> => {
-  const result = await pool.query('SELECT * FROM students ORDER BY id');
-  return result.rows;
+  return studentRepository.findAll();
 };
 
 export const getStudentById = async (id: number): Promise<Student | null> => {
-  const result = await pool.query('SELECT * FROM students WHERE id = $1', [id]);
-  return result.rows[0] || null;
+  return studentRepository.findById(id);
 };
 
 export const createStudent = async (student: Student): Promise<Student> => {
-  const { nom, groupe } = student;
-  const result = await pool.query(
-    'INSERT INTO students (nom, groupe) VALUES ($1, $2) RETURNING *',
-    [nom, groupe]
-  );
-  return result.rows[0];
+  return studentRepository.insert(student);
 };
 
 export const updateStudent = async (id: number, student: Student): Promise<Student | null> => {
-  const { nom, groupe } = student;
-  const result = await pool.query(
-    'UPDATE students SET nom = $1, groupe = $2 WHERE id = $3 RETURNING *',
-    [nom, groupe, id]
-  );
-  return result.rows[0] || null;
+  return studentRepository.update(id, student);
 };
 
 export const deleteStudent = async (id: number): Promise<boolean> => {
-  const result = await pool.query('DELETE FROM students WHERE id = $1', [id]);
-  return (result.rowCount ?? 0) > 0;
+  return studentRepository.remove(id);
 };

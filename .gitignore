@@ -1,3 +1,4 @@
 node_modules/
 dist/
 .env
+generate-test-token.ts

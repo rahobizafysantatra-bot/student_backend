@@ -4,6 +4,7 @@ import { authenticate } from '../security/auth.middleware';
 
 const router = Router();
 
+router.get('/stats', authenticate, studentController.stats);
 router.get('/', authenticate, studentController.getAll);
 router.get('/:id', authenticate, studentController.getById);
 router.post('/', authenticate, studentController.create);

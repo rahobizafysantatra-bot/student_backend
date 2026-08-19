@@ -1,7 +1,8 @@
-export type Groupe = 'N1' | 'N2' | 'N3';
+export type Group = 'N1' | 'N2' | 'N3';
 
 export interface Student {
   id?: number;
-  nom: string;
-  groupe: Groupe;
+  name: string;
+  email: string;
+  group: Group;
 }

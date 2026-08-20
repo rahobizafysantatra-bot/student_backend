@@ -1,4 +1,4 @@
 node_modules/
 dist/
 .env
-generate-test-token.ts
+generate-test-token.tscreate-admin.ts
